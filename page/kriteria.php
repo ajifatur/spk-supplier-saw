@@ -24,8 +24,8 @@
                         <thead>
                             <tr>
                                 <th width="30">No.</th>
-                                <th>Nama Kriteria</th>
-                                <th>Sifat</th>
+                                <th>Kriteria</th>
+                                <th>Atribut</th>
                                 <th width="50">Opsi</th>
                             </tr>
                         </thead>
@@ -72,13 +72,13 @@
                 <input type="hidden" name="op" value="kriteria">
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-form-label col-md-2">Nama Kriteria <span class="text-danger">*</span></label>
+                        <label class="col-form-label col-md-2">Kriteria <span class="text-danger">*</span></label>
                         <div class="col-md-10">
                             <input name="kriteria" type="text" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label col-md-2">Sifat <span class="text-danger">*</span></label>
+                        <label class="col-form-label col-md-2">Atribut <span class="text-danger">*</span></label>
                         <div class="col-md-10">
                             <select name="sifat" class="form-control" required>
                                 <option value="" disabled selected>-- Pilih--</option>
@@ -110,13 +110,13 @@
                 <input type="hidden" name="op" value="kriteria">
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label class="col-form-label col-md-2">Nama Kriteria <span class="text-danger">*</span></label>
+                        <label class="col-form-label col-md-2">Kriteria <span class="text-danger">*</span></label>
                         <div class="col-md-10">
                             <input name="kriteria" type="text" class="form-control" id="namaKriteria" required>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-form-label col-md-2">Sifat <span class="text-danger">*</span></label>
+                        <label class="col-form-label col-md-2">Atribut <span class="text-danger">*</span></label>
                         <div class="col-md-10">
                             <select name="sifat" class="form-control" id="sifat" required>
                                 <option value="" disabled selected>-- Pilih--</option>

@@ -2,6 +2,7 @@
 <html>
 <head>
     <?php include "_head.php"; ?>
+    <?php include "_style.php"; ?>
 </head>
 <body>
     <section class="material-half-bg">
@@ -23,7 +24,13 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Password</label>
-                    <input class="form-control" name="password" type="password" placeholder="Password">
+                    <div class="input-group">
+                        <input type="password" name="password" class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <a href="#" class="input-group-text text-dark btn btn-toggle-password"><i class="fa fa-eye mr-0"></i></a>
+                        </div>
+                    </div>
+                    <!-- <input class="form-control" name="password" type="password" placeholder="Password"> -->
                 </div>
                 <div class="form-group btn-container">
                     <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-sign-in fa-lg fa-fw"></i>Masuk</button>

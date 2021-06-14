@@ -14,6 +14,7 @@
             <li><a class="app-menu__item <?= isset($_GET['page']) && $_GET['page'] == 'bobot' ? 'active' : '' ?>" href="./?page=bobot"><i class="app-menu__icon fa fa-balance-scale"></i><span class="app-menu__label">Bobot</span></a></li>
             <li><a class="app-menu__item <?= isset($_GET['page']) && $_GET['page'] == 'penilaian' ? 'active' : '' ?>" href="./?page=penilaian"><i class="app-menu__icon fa fa-star"></i><span class="app-menu__label">Penilaian</span></a></li>
             <li><a class="app-menu__item <?= isset($_GET['page']) && $_GET['page'] == 'hasil' ? 'active' : '' ?>" href="./?page=hasil"><i class="app-menu__icon fa fa-bar-chart"></i><span class="app-menu__label">Hasil</span></a></li>
+            <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Panduan</span></a></li>
             <li><a class="app-menu__item" href="./logout.php" id="out"><i class="app-menu__icon fa fa-power-off"></i><span class="app-menu__label">Keluar</span></a></li>
         </ul>
     </aside>

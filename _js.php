@@ -9,7 +9,30 @@
     <script src="template/vali-admin/js/plugins/dataTables.bootstrap.min.js"></script>
     <script type="text/javascript">
         // DataTable
-        $("#datatable").DataTable();
+        var datatable = $("#datatable").DataTable({
+            "language": {
+                "lengthMenu": "Menampilkan _MENU_ data",
+                "zeroRecords": "Data tidak tersedia",
+                "info": "Menampilkan _START_ sampai _END_ dari total _TOTAL_ data",
+                "infoEmpty": "Data tidak ditemukan",
+                "infoFiltered": "(Terfilter dari total _MAX_ data)",
+                "search": "Cari:",
+                "paginate": {
+                    "first": "Pertama",
+                    "last": "Terakhir",
+                    "previous": "<",
+                    "next": ">",
+                },
+                "processing": "Memproses data..."
+            },
+            columnDefs: [
+                {orderable: false, targets: -1},
+            ],
+            order: []
+        });
+        datatable.on('draw.dt', function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
 
         // Button Add
         $(document).on("click", ".btn-add", function(event){
@@ -217,4 +240,21 @@
                 return false;
             }
         });
+    </script>
+
+    <script>
+    // Button Toggle Password
+    $(document).on("click", ".btn-toggle-password", function(e){
+        e.preventDefault();
+        if(!$(this).hasClass("show")){
+            $(this).parents(".form-group").find("input[type=password]").attr("type","text");
+            $(this).find(".fa").removeClass("fa-eye").addClass("fa-eye-slash");
+            $(this).addClass("show");
+        }
+        else{
+            $(this).parents(".form-group").find("input[type=text]").attr("type","password");
+            $(this).find(".fa").removeClass("fa-eye-slash").addClass("fa-eye");
+            $(this).removeClass("show");
+        }
+    });
     </script>

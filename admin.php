@@ -6,6 +6,7 @@ require "./connect.php";
 <html lang="en">
 <head>
     <?php include "_head.php"; ?>
+    <?php include "_style.php"; ?>
 </head>
 <body class="app sidebar-mini">
     <?php include "_navbar.php"; ?>
