@@ -1,7 +1,10 @@
 <?php
 require '../connect.php';
 require '../class/crud.php';
+require '../class/user.php';
+
 $crud=new crud($konek);
+$user=new user($konek);
 
 if ($_SERVER['REQUEST_METHOD']=='GET') {
     $id=@$_GET['id'];
@@ -17,6 +20,11 @@ $sifat=@$_POST['sifat'];
 $nilai=@$_POST['nilai'];
 $keterangan=@$_POST['keterangan'];
 $bobot=@$_POST['bobot'];
+
+$nama=@$_POST['nama'];
+$username=@$_POST['username'];
+$password=@$_POST['password'];
+$role=@$_POST['role'];
 switch ($op){
     case 'barang'://tambah data barang
         $query="INSERT INTO jenis_barang (namaBarang) VALUES ('$barang')";
@@ -53,5 +61,11 @@ switch ($op){
             $query.="INSERT INTO nilai_supplier (id_supplier,id_jenisbarang,id_kriteria,id_nilaikriteria) VALUES ('$supplier','$barang','$kriteria[$i]','$nilai[$i]');";
         }
         $crud->multiAddData($cek,$query,$konek);
+    break;
+    case 'pengguna'://tambah data pengguna
+        $cek="SELECT id FROM user WHERE username='$username'";
+        $hash=password_hash($password, PASSWORD_DEFAULT);
+        $query="INSERT INTO user (id,nama,username,password,role) VALUES ('','$nama','$username','$hash','$role')";
+        $user->add($cek,$query,$konek);
     break;
 }

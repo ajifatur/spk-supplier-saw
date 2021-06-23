@@ -38,4 +38,8 @@ switch ($op){
         $query="DELETE FROM nilai_supplier WHERE id_supplier='$a' AND id_jenisbarang='$b'";
         $crud->delete($query,$konek);
         break;
+    case 'pengguna':
+        $query="DELETE FROM user WHERE id='$id'";
+        $crud->delete($query,$konek);
+        break;
 }

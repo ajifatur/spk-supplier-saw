@@ -16,9 +16,10 @@ if (empty($user)){
         $data=$execute->fetch_array(MYSQLI_ASSOC);
         if (password_verify($pass,$data['password'])){
             session_start();
-            $_SESSION['user']=$data['username'];
-            $_SESSION['pass']=$data['password'];
-            //header('location:./index.php');
+            $_SESSION['id']=$data['id'];
+            $_SESSION['nama']=$data['nama'];
+            $_SESSION['username']=$data['username'];
+            $_SESSION['role']=$data['role'];
             $result='success';
         }else{
             $result="Username dan password tidak cocok!";

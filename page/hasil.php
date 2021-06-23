@@ -30,7 +30,7 @@
                         ?>
                     </select>
                 </div>
-                <a href="./cetakpdf.php" class="btn btn-sm btn-primary" target="_blank"><i class="fa fa-print mr-2"></i>Cetak Laporan</a>
+                <a href="./cetakpdf.php" class="btn btn-sm btn-primary btn-print" target="_blank" style="display: none;"><i class="fa fa-print mr-2"></i>Cetak Laporan</a>
             </div>
             <div class="tile-body">
                 <div id="result-saw">

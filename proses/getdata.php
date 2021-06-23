@@ -71,5 +71,13 @@ switch($op){
 		    ]);
 		}
 	break;
+	case 'pengguna':
+		$query = "SELECT id, nama, username, role FROM user WHERE id = '$id'";
+		$execute = $konek->query($query);
+		if($execute->num_rows > 0){
+		    $data = $execute->fetch_array(MYSQLI_ASSOC);
+		    echo json_encode($data);
+		}
+	break;
 }
 ?>

@@ -138,6 +138,18 @@
             }
         });
 
+        // Button Forbidden
+        $(document).on("click", ".btn-forbidden", function(event){
+            event.preventDefault();
+            alert("Tidak mempunyai hak akses untuk melakukan aksi ini!");
+        });
+
+        // Button Forbidden Own
+        $(document).on("click", ".btn-forbidden-own", function(event){
+            event.preventDefault();
+            alert("Tidak bisa melakukan aksi ini pada data sendiri!");
+        });
+
         // Categorize
         $(document).on("change", "#categorize", function(){
             var id = $(this).val();
@@ -190,6 +202,7 @@
         $("#generate-saw").change(function() {
             var value = $(this).val();
             $("#result-saw").hide("slow");
+            $(".btn-print").show("slow");
             document.cookie = "pilih="+value+";expires=3600;path=/";
             if (getCookieData) {
                 $("#result-saw").load("./hasil.php").slideToggle("slow");

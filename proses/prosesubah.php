@@ -1,7 +1,11 @@
 <?php
 require '../connect.php';
 require '../class/crud.php';
+require '../class/user.php';
+
 $crud=new crud($konek);
+$user=new user($konek);
+
 if ($_SERVER['REQUEST_METHOD']=='GET') {
     $id=@$_GET['id'];
     $op=@$_GET['op'];
@@ -16,6 +20,10 @@ $sifat=@$_POST['sifat'];
 $nilai=@$_POST['nilai'];
 $keterangan=@$_POST['keterangan'];
 $bobot=@$_POST['bobot'];
+
+$nama=@$_POST['nama'];
+$username=@$_POST['username'];
+$password=@$_POST['password'];
 switch ($op){
     case 'barang':
         $query="UPDATE jenis_barang SET namaBarang='$barang' WHERE id_jenisbarang='$id'";
@@ -48,5 +56,17 @@ switch ($op){
             $query.="UPDATE nilai_supplier SET id_nilaikriteria='$nilai[$i]' WHERE id_nilaisupplier='$id[$i]';";
         }
         $crud->update($query,$konek,'./?page=penilaian');
+    break;
+    case 'pengguna':
+        $cek="SELECT id FROM user WHERE username='$username' AND id!='$id'";
+        if($password != ''){
+            $hash=password_hash($password, PASSWORD_DEFAULT);
+            $query="UPDATE user SET nama='$nama', username='$username', password='$hash' WHERE id='$id'";
+        }
+        else{
+            $query="UPDATE user SET nama='$nama', username='$username' WHERE id='$id'";
+        }
+        $session = array('id'=>$id,'nama'=>$nama,'username'=>$username);
+        $user->update($cek,$query,$konek,'./?page=pengguna',$session);
     break;
 }
