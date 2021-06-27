@@ -5,8 +5,8 @@
         <ul class="app-menu">
             <li class="app-sidebar__logo">
                 <a class="app-menu__item p-0" href="index.php">
-                    <img class="img-fluid logo-big" src="asset/logo/yntkts.png">
-                    <img class="img-fluid logo-small" src="asset/logo/favicon-spk.png">
+                    <img class="img-fluid logo-big" src="asset/logo/sidebar-logo.png">
+                    <img class="img-fluid logo-small" src="asset/logo/fav-bm1.png" width="30">
                 </a>
             </li>
             <hr>

@@ -167,7 +167,7 @@
 
         // Close Modal Event 
         $(".modal").on('hidden.bs.modal', function(event){
-            $("input[name=id], input.form-control, select.form-control").val(null);
+            $(".modal").find("input[name=id], input.form-control, select.form-control").val(null);
         });
 
         // Submit Form Add / Edit

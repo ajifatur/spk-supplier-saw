@@ -9,9 +9,9 @@
         <div class="cover"></div>
     </section>
     <section class="login-content">
-        <div class="logo">
+        <div class="logo mb-4">
             <!-- <h1>YNTKTS</h1> -->
-            <img width="300" src="asset/logo/yntkts.png">
+            <img width="300" src="asset/logo/login-logo-fix.png">
         </div>
         <div class="login-box p-4">
             <form id="form-login" method="POST" action="ceklogin.php">

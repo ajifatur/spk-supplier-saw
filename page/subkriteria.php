@@ -16,7 +16,9 @@
     <div class="col-md-12">
         <div class="tile">
             <div class="tile-title-w-btn">
+                <?php if($_SESSION['role'] == 1): ?>
                 <a href="#" class="btn btn-sm btn-primary btn-add"><i class="fa fa-plus mr-2"></i>Tambah Data</a>
+                <?php endif; ?>
                 <div>
                     <select class="form-control form-control-sm" id="categorize" data-op="subkriteria">
                         <option value="">Semua Kriteria</option>
@@ -41,7 +43,9 @@
                                 <th>Kriteria</th>
                                 <th>Nilai</th>
                                 <th>Keterangan</th>
+                                <?php if($_SESSION['role'] == 1): ?>
                                 <th width="50">Opsi</th>
+                                <?php endif; ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,13 +61,17 @@
                                         <td>'.$data['namaKriteria'].'</td>
                                         <td>'.$data['nilai'].'</td>
                                         <td>'.$data['keterangan'].'</td>
+                                    ';
+                                    if($_SESSION['role'] == 1){
+                                        echo '
                                         <td>
                                             <div class="btn-group">
                                                 <a href="#" class="btn btn-sm btn-warning btn-edit" data-id="'.$data['id_nilaikriteria'].'" data-op="subkriteria" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
                                                 <a href="#" class="btn btn-sm btn-danger btn-delete" data-id="'.$data['id_nilaikriteria'].'" data-op="subkriteria" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash"></i></a>
                                             </div>
-                                        </td>
-                                    </tr>';
+                                        </td>';
+                                    }
+                                    echo '</tr>';
                                     $no++;
                                 }
                             }
@@ -76,6 +84,7 @@
     </div>
 </div>
 
+<?php if($_SESSION['role'] == 1): ?>
 <!-- Modal Add -->
 <div class="modal" id="modal-add">
     <div class="modal-dialog modal-lg" role="document">
@@ -176,3 +185,4 @@
         </div>
     </div>
 </div>
+<?php endif; ?>

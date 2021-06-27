@@ -11,7 +11,7 @@
         /* Login */
         .material-half-bg .cover {background-color: var(--primary-dark);}
         .login-content .logo {font-family: var(--font-family);}
-        .login-content .login-box {border-radius: .5rem;}
+        .login-content .login-box {border-radius: .5rem; min-height: auto;}
 
         /* Header */
         .app-header {background-color: var(--primary-dark);}

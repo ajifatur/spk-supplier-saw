@@ -9,6 +9,7 @@ class ComposerStaticInitdf0442f59b04cfc09dcb15d82b71d18d
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
+            'Svg\\' => 4,
             'Spipu\\Html2Pdf\\' => 15,
         ),
         'P' => 
@@ -16,9 +17,21 @@ class ComposerStaticInitdf0442f59b04cfc09dcb15d82b71d18d
             'Psr\\SimpleCache\\' => 16,
             'PhpOffice\\PhpSpreadsheet\\' => 25,
         ),
+        'F' => 
+        array (
+            'FontLib\\' => 8,
+        ),
+        'D' => 
+        array (
+            'Dompdf\\' => 7,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Svg\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
+        ),
         'Spipu\\Html2Pdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/spipu/html2pdf/src',
@@ -31,10 +44,35 @@ class ComposerStaticInitdf0442f59b04cfc09dcb15d82b71d18d
         array (
             0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
         ),
+        'FontLib\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phenx/php-font-lib/src/FontLib',
+        ),
+        'Dompdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dompdf/dompdf/src',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'S' => 
+        array (
+            'Sabberworm\\CSS' => 
+            array (
+                0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/lib',
+            ),
+        ),
     );
 
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Datamatrix' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/datamatrix.php',
+        'Dompdf\\Cpdf' => __DIR__ . '/..' . '/dompdf/dompdf/lib/Cpdf.php',
+        'HTML5_Data' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Data.php',
+        'HTML5_InputStream' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/InputStream.php',
+        'HTML5_Parser' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Parser.php',
+        'HTML5_Tokenizer' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/Tokenizer.php',
+        'HTML5_TreeBuilder' => __DIR__ . '/..' . '/dompdf/dompdf/lib/html5lib/TreeBuilder.php',
         'PDF417' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/pdf417.php',
         'QRcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/qrcode.php',
         'TCPDF' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf.php',
@@ -55,6 +93,7 @@ class ComposerStaticInitdf0442f59b04cfc09dcb15d82b71d18d
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitdf0442f59b04cfc09dcb15d82b71d18d::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitdf0442f59b04cfc09dcb15d82b71d18d::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitdf0442f59b04cfc09dcb15d82b71d18d::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitdf0442f59b04cfc09dcb15d82b71d18d::$classMap;
 
         }, null, ClassLoader::class);

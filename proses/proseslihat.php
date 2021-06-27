@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../connect.php';
 require '../class/crud.php';
 if ($_SERVER['REQUEST_METHOD']=='GET') {
@@ -28,13 +29,17 @@ switch ($op){
                     <td>'.$data['namaKriteria'].'</td>
                     <td>'.$data['nilai'].'</td>
                     <td>'.$data['keterangan'].'</td>
+                ';
+                if($_SESSION['role'] == 1){
+                    echo '
                     <td>
                         <div class="btn-group">
                             <a href="#" class="btn btn-sm btn-warning btn-edit" data-id="'.$data['id_nilaikriteria'].'" data-op="subkriteria" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
                             <a href="#" class="btn btn-sm btn-danger btn-delete" data-id="'.$data['id_nilaikriteria'].'" data-op="subkriteria" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash"></i></a>
                         </div>
-                    </td>
-                </tr>';
+                    </td>';
+                }
+                echo '</tr>';
                 $no++;
             }
         }
@@ -65,8 +70,13 @@ switch ($op){
                     <td>
                         <div class="btn-group">
                             <a href="#" class="btn btn-sm btn-info btn-detail" data-a="'.$data['id_supplier'].'" data-b="'.$data['id_jenisbarang'].'" data-op="nilai" data-toggle="tooltip" title="Detail"><i class="fa fa-eye"></i></a>
+                ';
+                if($_SESSION['role'] == 1){
+                    echo '
                             <a href="#" class="btn btn-sm btn-warning btn-edit" data-a="'.$data['id_supplier'].'" data-b="'.$data['id_jenisbarang'].'" data-op="nilai" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
-                            <a href="#" class="btn btn-sm btn-danger btn-delete" data-a="'.$data['id_supplier'].'" data-b="'.$data['id_jenisbarang'].'" data-op="nilai" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash"></i></a>
+                            <a href="#" class="btn btn-sm btn-danger btn-delete" data-a="'.$data['id_supplier'].'" data-b="'.$data['id_jenisbarang'].'" data-op="nilai" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash"></i></a>';
+                }
+                echo '
                         </div>
                     </td>
                 </tr>';

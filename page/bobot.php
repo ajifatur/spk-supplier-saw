@@ -25,9 +25,11 @@
 <div class="row">
     <div class="col-md-12">
         <div class="tile">
+            <?php if($_SESSION['role'] == 1): ?>
             <div class="tile-title-w-btn">
                 <a href="#" class="btn btn-sm btn-primary btn-add"><i class="fa fa-plus mr-2"></i>Tambah Data</a>
             </div>
+            <?php endif; ?>
             <div class="tile-body">
                 <div class="table-responsive">
                     <table class="table table-hover table-striped table-bordered" id="datatable">
@@ -35,7 +37,7 @@
                             <tr>
                                 <th width="30">No.</th>
                                 <th>Nama Barang</th>
-                                <th width="70">Opsi</th>
+                                <th width="<?= $_SESSION['role'] == 1 ? '70' : '30' ?>">Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,8 +54,13 @@
                                         <td>
                                             <div class="btn-group">
                                                 <a href="#" class="btn btn-sm btn-info btn-detail" data-id="'.$data['idbarangbobot'].'" data-op="bobot" data-toggle="tooltip" title="Detail"><i class="fa fa-eye"></i></a>
+                                    ';
+                                    if($_SESSION['role'] == 1){
+                                        echo '
                                                 <a href="#" class="btn btn-sm btn-warning btn-edit" data-id="'.$data['idbarangbobot'].'" data-op="bobot" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <a href="#" class="btn btn-sm btn-danger btn-delete" data-id="'.$data['idbarangbobot'].'" data-op="bobot" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash"></i></a>
+                                                <a href="#" class="btn btn-sm btn-danger btn-delete" data-id="'.$data['idbarangbobot'].'" data-op="bobot" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash"></i></a>';
+                                    }
+                                    echo '
                                             </div>
                                         </td>
                                     </tr>';
@@ -65,66 +72,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Add -->
-<div class="modal" id="modal-add">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Tambah Data</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-            </div>
-            <form class="form" method="post" action="./proses/prosestambah.php">
-                <input type="hidden" name="op" value="bobot">
-                <div class="modal-body">
-                    <div class="form-group row">
-                        <label class="col-form-label col-md-3">Barang <span class="text-danger">*</span></label>
-                        <div class="col-md-9">
-                            <select name="barang" class="form-control" required>
-                                <option value="" disabled selected>-- Pilih--</option>
-                                <?php
-                                    $query = "SELECT * FROM jenis_barang";
-                                    $execute = $konek->query($query);
-                                    if($execute->num_rows > 0){
-                                        while($data=$execute->fetch_array(MYSQLI_ASSOC)){
-                                            echo '<option value="'.$data['id_jenisbarang'].'">'.$data['namaBarang'].'</option>';
-                                        }
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <?php
-                        $query = "SELECT id_kriteria, namaKriteria FROM kriteria";
-                        $execute = $konek->query($query);
-                        if($execute->num_rows > 0){
-                            while($data=$execute->fetch_array(MYSQLI_ASSOC)){
-                                echo '
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-3">'.$data['namaKriteria'].' <span class="text-danger">*</span></label>
-                                    <div class="col-md-9">
-                                        <input type="hidden" name="kriteria[]" value="'.$data['id_kriteria'].'">
-                                        <select name="bobot[]" class="form-control" required>
-                                            <option value="" disabled selected>-- Pilih--</option>';
-                                foreach($listWeight as $w){
-                                    echo '<option value="'.$w['nilai'].'">'.$w['nama'].'</option>';
-                                }
-                                echo '
-                                        </select>
-                                    </div>
-                                </div>';
-                            }
-                        }
-                    ?>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-save mr-2"></i>Simpan</button>
-                    <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal"><i class="fa fa-close mr-2"></i>Tutup</button>
-                </div>
-            </form>
         </div>
     </div>
 </div>
@@ -183,6 +130,67 @@
             <div class="modal-footer">
                 <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal"><i class="fa fa-close mr-2"></i>Tutup</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<?php if($_SESSION['role'] == 1): ?>
+<!-- Modal Add -->
+<div class="modal" id="modal-add">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tambah Data</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+            </div>
+            <form class="form" method="post" action="./proses/prosestambah.php">
+                <input type="hidden" name="op" value="bobot">
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-form-label col-md-3">Barang <span class="text-danger">*</span></label>
+                        <div class="col-md-9">
+                            <select name="barang" class="form-control" required>
+                                <option value="" disabled selected>-- Pilih--</option>
+                                <?php
+                                    $query = "SELECT * FROM jenis_barang";
+                                    $execute = $konek->query($query);
+                                    if($execute->num_rows > 0){
+                                        while($data=$execute->fetch_array(MYSQLI_ASSOC)){
+                                            echo '<option value="'.$data['id_jenisbarang'].'">'.$data['namaBarang'].'</option>';
+                                        }
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <?php
+                        $query = "SELECT id_kriteria, namaKriteria FROM kriteria";
+                        $execute = $konek->query($query);
+                        if($execute->num_rows > 0){
+                            while($data=$execute->fetch_array(MYSQLI_ASSOC)){
+                                echo '
+                                <div class="form-group row">
+                                    <label class="col-form-label col-md-3">'.$data['namaKriteria'].' <span class="text-danger">*</span></label>
+                                    <div class="col-md-9">
+                                        <input type="hidden" name="kriteria[]" value="'.$data['id_kriteria'].'">
+                                        <select name="bobot[]" class="form-control" required>
+                                            <option value="" disabled selected>-- Pilih--</option>';
+                                foreach($listWeight as $w){
+                                    echo '<option value="'.$w['nilai'].'">'.$w['nama'].'</option>';
+                                }
+                                echo '
+                                        </select>
+                                    </div>
+                                </div>';
+                            }
+                        }
+                    ?>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-save mr-2"></i>Simpan</button>
+                    <button class="btn btn-sm btn-danger" type="button" data-dismiss="modal"><i class="fa fa-close mr-2"></i>Tutup</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -248,3 +256,4 @@
         </div>
     </div>
 </div>
+<?php endif; ?>

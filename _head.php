@@ -6,4 +6,4 @@
     <link rel="stylesheet" type="text/css" href="template/vali-admin/css/main.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Icon -->
-    <link rel="shortcut icon" href="asset/logo/favicon-spk.png">
+    <link rel="shortcut icon" href="asset/logo/fav-bm1.png">
