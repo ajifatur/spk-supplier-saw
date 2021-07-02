@@ -34,7 +34,7 @@ $saw->setconfig($konek,$cookiePilih);
                         echo "<td>".$key['namaSupplier']."</td>";
                         $no=0;
                         foreach ($saw->getNilaiMatriks($key['id_supplier']) as $data) {
-                            echo "<td>$data[nilai]</td>";
+                            echo "<td>".number_format($data[nilai],2,'.','.')."</td>";
                         }
                         echo "</tr>";
                     }
@@ -48,7 +48,7 @@ $saw->setconfig($konek,$cookiePilih);
     </div>
 </div>
 <div id="matriks-2">
-    <h4>Normalisasi Matriks Keputusan</h4>
+    <h4>Matriks Ternormalisasi</h4>
     <div class="table-responsive">
         <table class="table table-sm table-hover table-striped table-bordered table-saw">
             <thead>
@@ -78,7 +78,7 @@ $saw->setconfig($konek,$cookiePilih);
                         foreach ($saw->getNilaiMatriks($key['id_supplier']) as $data) {
                             //menghitung normalisasi
                             $hasil=$saw->Normalisasi($saw->getArrayNilai($data['id_kriteria']),$data['sifat'],$data['nilai']);
-                            echo "<td>$hasil</td>";
+                            echo "<td>".number_format($hasil,2,'.','.')."</td>";
                             $hitungbobot[$key['id_supplier']][$no]=$hasil*$saw->getBobot($data['id_kriteria']);
                             $no++;
                         }
@@ -136,9 +136,9 @@ $saw->setconfig($konek,$cookiePilih);
                         echo "<td>".($index+1).".</td>";
                         echo "<td>".$key['namaSupplier']."</td>";
                         foreach ($hitungbobot[$key['id_supplier']] as $data) {
-                            echo "<td>$data</td>";
+                            echo "<td>".number_format($data,2,'.','.')."</td>";
                         }
-                        echo "<td>".$key['hasil']."</td>";
+                        echo "<td>".number_format($key['hasil'],2,'.','.')."</td>";
                         echo "</tr>";
                     }
                 }

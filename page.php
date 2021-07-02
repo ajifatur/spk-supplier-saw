@@ -31,6 +31,9 @@ switch ($page){
     case 'pengguna':
         include 'page/pengguna.php';
         break;
+    case 'profil':
+        include 'page/profil.php';
+        break;
     default:
         include 'page/404.php';
 }

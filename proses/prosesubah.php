@@ -24,6 +24,10 @@ $bobot=@$_POST['bobot'];
 $nama=@$_POST['nama'];
 $username=@$_POST['username'];
 $password=@$_POST['password'];
+$redirect=@$_POST['redirect'];
+$current_password=@$_POST['current_password'];
+$new_password=@$_POST['new_password'];
+$confirm_password=@$_POST['confirm_password'];
 switch ($op){
     case 'barang':
         $query="UPDATE jenis_barang SET namaBarang='$barang' WHERE id_jenisbarang='$id'";
@@ -67,6 +71,12 @@ switch ($op){
             $query="UPDATE user SET nama='$nama', username='$username' WHERE id='$id'";
         }
         $session = array('id'=>$id,'nama'=>$nama,'username'=>$username);
-        $user->update($cek,$query,$konek,'./?page=pengguna',$session);
+        if(isset($redirect))
+			$user->update($cek,$query,$konek,'./?page='.$redirect,$session);
+		else
+			$user->update($cek,$query,$konek,'./?page=pengguna',$session);
+    break;
+    case 'update-password':
+		$user->updatePassword($id,$current_password,$new_password,$confirm_password,$konek);
     break;
 }

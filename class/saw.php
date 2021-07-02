@@ -92,7 +92,7 @@ class saw {
         $queryHasil = "SELECT hasil.hasil AS hasil,jenis_barang.namaBarang,supplier.namaSupplier AS namaSupplier FROM hasil JOIN jenis_barang ON jenis_barang.id_jenisbarang=hasil.id_jenisbarang JOIN supplier ON supplier.id_supplier=hasil.id_supplier WHERE hasil.hasil=(SELECT MAX(hasil) FROM hasil WHERE id_jenisbarang='$this->idCookie')";
         $execute = $this->getConnect()->query($queryHasil)->fetch_array(MYSQLI_ASSOC);
         if($execute){
-            echo "<p>Supplier barang <i>$execute[namaBarang]</i> terbaik adalah <b>$execute[namaSupplier]</b> dengan nilai <b>".round($execute['hasil'],3)."</b></p>";
+            echo "<p>Supplier barang <i>$execute[namaBarang]</i> terbaik adalah <b>$execute[namaSupplier]</b> dengan nilai <b>".number_format($execute['hasil'],2,'.','.')."</b></p>";
         }
     }
 

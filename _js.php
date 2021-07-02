@@ -190,6 +190,15 @@
                         alert('Data Tidak Boleh Sama!');
                     } else if (e == 'failed'){
                         alert('Gagal Memasukan data!');
+                    } else if (e == 'not same'){
+                        alert('Password saat ini yang dimasukkan tidak cocok!');
+                    } else if (e == 'not confirmed'){
+                        alert('Konfirmasi password gagal!');
+                    } else if (e == 'password changed'){
+                        alert('Berhasil Mengganti Password!');
+                        setTimeout(function () {
+                            location.reload();
+                        },100);
                     } else{
                         alert('Berhasil Update Data!');
                         window.location.href = e;
