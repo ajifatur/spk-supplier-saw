@@ -34,7 +34,7 @@ $saw->setconfig($konek,$cookiePilih);
                         echo "<td>".$key['namaSupplier']."</td>";
                         $no=0;
                         foreach ($saw->getNilaiMatriks($key['id_supplier']) as $data) {
-                            echo "<td>".number_format($data[nilai],2,'.','.')."</td>";
+                            echo "<td>".number_format($data['nilai'],2,'.','.')."</td>";
                         }
                         echo "</tr>";
                     }
@@ -77,7 +77,7 @@ $saw->setconfig($konek,$cookiePilih);
                         //foreach nilai supplier
                         foreach ($saw->getNilaiMatriks($key['id_supplier']) as $data) {
                             //menghitung normalisasi
-                            $hasil=$saw->Normalisasi($saw->getArrayNilai($data['id_kriteria']),$data['sifat'],$data['nilai']);
+                            $hasil=$saw->normalisasi($saw->getArrayNilai($data['id_kriteria']),$data['sifat'],$data['nilai']);
                             echo "<td>".number_format($hasil,2,'.','.')."</td>";
                             $hitungbobot[$key['id_supplier']][$no]=$hasil*$saw->getBobot($data['id_kriteria']);
                             $no++;

@@ -18,16 +18,6 @@ class saw {
     public function getConnect(){
        return $this->konek;
     }
-    //mendapatkan kriteria
-    public function getKriteria(){
-        $data=array();
-        $querykriteria="SELECT namaKriteria FROM kriteria";//query tabel kriteria
-        $execute=$this->getConnect()->query($querykriteria);
-        while ($row=$execute->fetch_array(MYSQLI_ASSOC)) {
-            array_push($data,$row['namaKriteria']);
-        }
-        return $data;
-    }
     //mendapatkan alternative
     public function getAlternative(){
         $data=array();
@@ -35,6 +25,16 @@ class saw {
         $execute=$this->getConnect()->query($queryAlternative);
         while ($row=$execute->fetch_array(MYSQLI_ASSOC)) {
             array_push($data,array("namaSupplier"=>$row['namaSupplier'],"id_supplier"=>$row['id_supplier']));
+        }
+        return $data;
+    }
+    //mendapatkan kriteria
+    public function getKriteria(){
+        $data=array();
+        $querykriteria="SELECT namaKriteria FROM kriteria";//query tabel kriteria
+        $execute=$this->getConnect()->query($querykriteria);
+        while ($row=$execute->fetch_array(MYSQLI_ASSOC)) {
+            array_push($data,$row['namaKriteria']);
         }
         return $data;
     }
