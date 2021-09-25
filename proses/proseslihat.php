@@ -11,6 +11,46 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
 }
 $crud=new crud();
 switch ($op){
+    case 'kriteria':
+        if(!empty($id)){
+            $where = "WHERE kriteria.id_jenisbarang='$id'";
+        }
+        else{
+            $where = null;
+        }
+        $query="SELECT * FROM kriteria JOIN jenis_barang ON kriteria.id_jenisbarang=jenis_barang.id_jenisbarang $where ORDER BY id_kriteria,kriteria.id_jenisbarang ASC";
+        $execute=$konek->query($query);
+        if($execute->num_rows > 0){
+            $no=1;
+            while($data=$execute->fetch_array(MYSQLI_ASSOC)){
+                echo '
+                <tr>
+                    <td>'.$no.'</td>
+                    <td>'.$data['namaKriteria'].'</td>
+                    <td>'.$data['sifat'].'</td>
+                    <td>'.$data['namaBarang'].'</td>
+                ';
+                if($_SESSION['role'] == 1){
+                    echo '
+                    <td>
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-sm btn-warning btn-edit" data-id="'.$data['id_kriteria'].'" data-op="kriteria" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
+                            <a href="#" class="btn btn-sm btn-danger btn-delete" data-id="'.$data['id_kriteria'].'" data-op="kriteria" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash"></i></a>
+                        </div>
+                    </td>';
+                }
+                echo '</tr>';
+                $no++;
+            }
+        }
+        else{
+            echo '
+            <tr>
+                <td colspan="5" align="center"><em>Tidak ada data.</em></td>
+            </tr>
+            ';
+        }
+    break;
     case 'subkriteria':
         if(!empty($id)){
             $where = "WHERE nilai_kriteria.id_kriteria='$id'";

@@ -1,4 +1,3 @@
-
     <!-- JavaScript -->
     <script src="template/vali-admin/js/jquery-3.3.1.min.js"></script>
     <script src="template/vali-admin/js/popper.min.js"></script>
@@ -53,17 +52,63 @@
                 data: {id: id, a: a, b: b, op: op},
                 dataType: "JSON",
                 success: function(e){
-                    if(op == 'bobot' || op == 'nilai'){
+                    if(op == 'bobot'){
                         // Disabled
                         var disabledKeys = Object.keys(e.disabled);
                         for(i=0; i<disabledKeys.length; i++){
                             $("#modal-detail").find("#"+disabledKeys[i]).val(e.disabled[disabledKeys[i]]);
                         }
                         // Enabled
+                        var kriteria = [];
                         $(e.enabled).each(function(key,data){
+                            kriteria.push(data.id_kriteria);
                             var enabledKeys = Object.keys(data);
                             for(i=0; i<enabledKeys.length; i++){
-                                $("#modal-detail").find("#"+enabledKeys[i]+"-"+key).val(data[enabledKeys[i]]);
+                                $("#modal-detail").find("#id_bobotkriteria-"+data.id_kriteria).val(data.id_bobotkriteria);
+                                $("#modal-detail").find("#bobot-"+data.id_kriteria).val(data.bobot);
+                            }
+                        });
+                        // Hide unused criteria
+                        $("#modal-detail .form-group-penilaian").each(function(key,elem){
+                            var id = $(elem).data("id");
+                            var check = $.inArray(id.toString(), kriteria);
+                            if(check < 0){
+                                $(elem).addClass("d-none");
+                                $(elem).find("select").removeAttr("required");
+                            }
+                            else{
+                                $(elem).removeClass("d-none");
+                                $(elem).find("select").attr("required","required");
+                            }
+                        });
+                    }
+                    else if(op == 'nilai'){
+                        // Disabled
+                        var disabledKeys = Object.keys(e.disabled);
+                        for(i=0; i<disabledKeys.length; i++){
+                            $("#modal-detail").find("#"+disabledKeys[i]).val(e.disabled[disabledKeys[i]]);
+                        }
+                        // Enabled
+                        var kriteria = [];
+                        $(e.enabled).each(function(key,data){
+                            kriteria.push(data.id_kriteria);
+                            var enabledKeys = Object.keys(data);
+                            for(i=0; i<enabledKeys.length; i++){
+                                $("#modal-detail").find("#id_nilaisupplier-"+data.id_kriteria).val(data.id_nilaisupplier);
+                                $("#modal-detail").find("#id_nilaikriteria-"+data.id_kriteria).val(data.id_nilaikriteria);
+                            }
+                        });
+                        // Hide unused criteria
+                        $("#modal-detail .form-group-penilaian").each(function(key,elem){
+                            var id = $(elem).data("id");
+                            var check = $.inArray(id.toString(), kriteria);
+                            if(check < 0){
+                                $(elem).addClass("d-none");
+                                $(elem).find("select").removeAttr("required");
+                            }
+                            else{
+                                $(elem).removeClass("d-none");
+                                $(elem).find("select").attr("required","required");
                             }
                         });
                     }
@@ -85,17 +130,63 @@
                 data: {id: id, a: a, b: b, op: op},
                 dataType: "JSON",
                 success: function(e){
-                    if(op == 'bobot' || op == 'nilai'){
+                    if(op == 'bobot'){
                         // Disabled
                         var disabledKeys = Object.keys(e.disabled);
                         for(i=0; i<disabledKeys.length; i++){
                             $("#modal-edit").find("#"+disabledKeys[i]).val(e.disabled[disabledKeys[i]]);
                         }
                         // Enabled
+                        var kriteria = [];
                         $(e.enabled).each(function(key,data){
+                            kriteria.push(data.id_kriteria);
                             var enabledKeys = Object.keys(data);
                             for(i=0; i<enabledKeys.length; i++){
-                                $("#modal-edit").find("#"+enabledKeys[i]+"-"+key).val(data[enabledKeys[i]]);
+                                // $("#modal-edit").find("#id_bobotkriteria-"+data.id_kriteria).val(data.id_bobotkriteria);
+                                $("#modal-edit").find("#bobot-"+data.id_kriteria).attr("name","bobot["+data.id_bobotkriteria+"]").val(data.bobot);
+                            }
+                        });
+                        // Hide unused criteria
+                        $("#modal-edit .form-group-penilaian").each(function(key,elem){
+                            var id = $(elem).data("id");
+                            var check = $.inArray(id.toString(), kriteria);
+                            if(check < 0){
+                                $(elem).addClass("d-none");
+                                $(elem).find("select").removeAttr("required");
+                            }
+                            else{
+                                $(elem).removeClass("d-none");
+                                $(elem).find("select").attr("required","required");
+                            }
+                        });
+                    }
+                    else if(op == 'nilai'){
+                        // Disabled
+                        var disabledKeys = Object.keys(e.disabled);
+                        for(i=0; i<disabledKeys.length; i++){
+                            $("#modal-edit").find("#"+disabledKeys[i]).val(e.disabled[disabledKeys[i]]);
+                        }
+                        // Enabled
+                        var kriteria = [];
+                        $(e.enabled).each(function(key,data){
+                            kriteria.push(data.id_kriteria);
+                            var enabledKeys = Object.keys(data);
+                            for(i=0; i<enabledKeys.length; i++){
+                                // $("#modal-edit").find("#id_nilaisupplier-"+data.id_kriteria).val(data.id_nilaisupplier);
+                                $("#modal-edit").find("#id_nilaikriteria-"+data.id_kriteria).attr("name","nilai["+data.id_nilaisupplier+"]").val(data.id_nilaikriteria);
+                            }
+                        });
+                        // Hide unused criteria
+                        $("#modal-edit .form-group-penilaian").each(function(key,elem){
+                            var id = $(elem).data("id");
+                            var check = $.inArray(id.toString(), kriteria);
+                            if(check < 0){
+                                $(elem).addClass("d-none");
+                                $(elem).find("select").removeAttr("required");
+                            }
+                            else{
+                                $(elem).removeClass("d-none");
+                                $(elem).find("select").attr("required","required");
                             }
                         });
                     }
@@ -164,10 +255,19 @@
                 }
             });
         });
+        
+        // Penilaian Barang
+        $(document).on("change", ".penilaian-barang", function(){
+            var barang = $(this).val();
+            var op = $(this).data("op");
+            $(this).parents(".modal").find(".kriteria-barang").load("proses/kriteriabarang.php?id="+barang+"&op="+op);
+        });
 
         // Close Modal Event 
         $(".modal").on('hidden.bs.modal', function(event){
             $(".modal").find("input[name=id], input.form-control, select.form-control").val(null);
+            if($(".modal").find(".kriteria-barang"))
+                $(".modal").find(".kriteria-barang").empty();
         });
 
         // Submit Form Add / Edit

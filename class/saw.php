@@ -11,13 +11,27 @@ class saw {
     private $konek;
     private $idCookie;
     public $simpanNormalisasi=array();
+
     public function setconfig($konek,$idCookie){
         $this->konek=$konek;
         $this->idCookie=$idCookie;
     }
+
     public function getConnect(){
        return $this->konek;
     }
+
+    //mendapatkan kriteria
+    public function getKriteria(){
+        $data=array();
+        $querykriteria="SELECT namaKriteria FROM kriteria WHERE id_jenisbarang='$this->idCookie'";//query tabel kriteria
+        $execute=$this->getConnect()->query($querykriteria);
+        while ($row=$execute->fetch_array(MYSQLI_ASSOC)) {
+            array_push($data,$row['namaKriteria']);
+        }
+        return $data;
+    }
+
     //mendapatkan alternative
     public function getAlternative(){
         $data=array();
@@ -28,19 +42,18 @@ class saw {
         }
         return $data;
     }
-    //mendapatkan kriteria
-    public function getKriteria(){
-        $data=array();
-        $querykriteria="SELECT namaKriteria FROM kriteria";//query tabel kriteria
-        $execute=$this->getConnect()->query($querykriteria);
-        while ($row=$execute->fetch_array(MYSQLI_ASSOC)) {
-            array_push($data,$row['namaKriteria']);
-        }
-        return $data;
+
+    //mendapatkan nilai kriteria
+    public function getNilaiKriteria($id_supplier, $nama_kriteria){
+        $query = "SELECT nilai_kriteria.keterangan AS keterangan FROM nilai_supplier JOIN nilai_kriteria ON nilai_supplier.id_nilaikriteria=nilai_kriteria.id_nilaikriteria JOIN kriteria ON nilai_supplier.id_kriteria=kriteria.id_kriteria WHERE nilai_supplier.id_jenisbarang='$this->idCookie' AND nilai_supplier.id_supplier='$id_supplier' AND kriteria.namaKriteria='$nama_kriteria'";
+        $execute=$this->getConnect()->query($query);
+        $data = $execute->fetch_array(MYSQLI_ASSOC);
+        return $data['keterangan'];
     }
+
     public function getNilaiMatriks($id_supplier){
         $data=array();
-        $queryGetNilai="SELECT nilai_kriteria.nilai AS nilai,kriteria.sifat AS sifat,nilai_supplier.id_kriteria AS id_kriteria FROM nilai_supplier JOIN kriteria ON kriteria.id_kriteria=nilai_supplier.id_kriteria JOIN nilai_kriteria ON nilai_kriteria.id_nilaikriteria=nilai_supplier.id_nilaikriteria WHERE (id_jenisbarang='$this->idCookie' AND id_supplier='$id_supplier')";
+        $queryGetNilai="SELECT nilai_kriteria.nilai AS nilai,kriteria.sifat AS sifat,nilai_supplier.id_kriteria AS id_kriteria FROM nilai_supplier JOIN kriteria ON kriteria.id_kriteria=nilai_supplier.id_kriteria JOIN nilai_kriteria ON nilai_kriteria.id_nilaikriteria=nilai_supplier.id_nilaikriteria WHERE (nilai_supplier.id_jenisbarang='$this->idCookie' AND id_supplier='$id_supplier')";
         $execute=$this->getConnect()->query($queryGetNilai);
         while ($row=$execute->fetch_array(MYSQLI_ASSOC)) {
             array_push($data,array(
@@ -51,6 +64,7 @@ class saw {
         }
         return $data;
     }
+
     public function getArrayNilai($id_kriteria){
         $data=array();
         $queryGetArrayNilai="SELECT nilai_kriteria.nilai AS nilai FROM nilai_supplier INNER JOIN nilai_kriteria ON nilai_supplier.id_nilaikriteria=nilai_kriteria.id_nilaikriteria WHERE nilai_supplier.id_kriteria='$id_kriteria' AND nilai_supplier.id_jenisbarang='$this->idCookie'";
@@ -60,6 +74,7 @@ class saw {
         }
         return $data;
     }
+
     //rumus normalisasai
     public function normalisasi($array,$sifat,$nilai){
         if ($sifat=='Benefit'){
@@ -69,12 +84,14 @@ class saw {
         }
         return round($result,3);
     }
+    
     //mendapatkan bobot kriteria
     public function getBobot($id_kriteria){
         $queryBobot="SELECT bobot FROM bobot_kriteria WHERE id_jenisbarang='$this->idCookie' AND id_kriteria='$id_kriteria' ";
         $row=$this->getConnect()->query($queryBobot)->fetch_array(MYSQLI_ASSOC);
         return $row['bobot'];
     }
+    
     //meyimpan hasil perhitungan
     public function simpanHasil($id_supplier,$hasil){
         $queryCek="SELECT hasil FROM hasil WHERE id_supplier='$id_supplier' AND id_jenisbarang='$this->idCookie'";
@@ -87,7 +104,8 @@ class saw {
         $execute=$this->getConnect()->query($querySimpan);
 
     }
-    //Kmencari kesimpulan
+    
+    //mencari kesimpulan
     public function getHasil(){
         $queryHasil = "SELECT hasil.hasil AS hasil,jenis_barang.namaBarang,supplier.namaSupplier AS namaSupplier FROM hasil JOIN jenis_barang ON jenis_barang.id_jenisbarang=hasil.id_jenisbarang JOIN supplier ON supplier.id_supplier=hasil.id_supplier WHERE hasil.hasil=(SELECT MAX(hasil) FROM hasil WHERE id_jenisbarang='$this->idCookie')";
         $execute = $this->getConnect()->query($queryHasil)->fetch_array(MYSQLI_ASSOC);
@@ -95,5 +113,4 @@ class saw {
             echo "<p>Supplier barang <i>$execute[namaBarang]</i> terbaik adalah <b>$execute[namaSupplier]</b> dengan nilai <b>".number_format($execute['hasil'],2,'.','.')."</b></p>";
         }
     }
-
 }

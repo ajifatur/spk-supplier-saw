@@ -44,6 +44,7 @@
                                     switch($data['role']){
                                         case 1: $role = 'Admin'; break;
                                         case 2: $role = 'Manajer'; break;
+                                        case 3: $role = 'Operator'; break;
                                         default: $role = ''; break;
                                     }
                                     if($data['id'] == $_SESSION['id'])
@@ -123,6 +124,7 @@
                                 <option value="" disabled selected>-- Pilih--</option>
                                 <option value="1">Admin</option>
                                 <option value="2">Manajer</option>
+                                <option value="3">Operator</option>
                             </select>
                         </div>
                     </div>

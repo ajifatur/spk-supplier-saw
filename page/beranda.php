@@ -33,7 +33,7 @@
                     <div class="col-sm mt-3 mt-sm-0 order-2 order-sm-1">
                         <h5 class="mt-0">Panduan</h5>
                         <p>Apabila masih bingung mengenai cara menggunakan sistem ini, silahkan mengunduh panduan di bawah ini.</p>
-                        <p class="mb-0"><a href="#" class="btn btn-sm btn-primary" target="_blank"><i class="fa fa-file-pdf-o mr-2"></i>Unduh Panduan</a></p>
+                        <p class="mb-0"><a href="asset/pdf/xxPANDUAN PEMAKAIAN.pdf" class="btn btn-sm btn-primary" target="_blank"><i class="fa fa-file-pdf-o mr-2"></i>Unduh Panduan</a></p>
                     </div>
                     <div class="col-sm-auto align-self-center text-center order-1 order-sm-2">
                         <img src="asset/image/illustration/undraw_instruction_manual_cyae.svg" width="175" alt="Instruction">

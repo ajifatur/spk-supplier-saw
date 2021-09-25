@@ -30,7 +30,7 @@ ob_start();
     <div id="header">
         <table>
             <tr>
-                <td id="header-logo" width="100"><img src="http://spk.faturmedia.xyz/asset/logo/fav-bm1.png" width="100"></td>
+                <td id="header-logo" width="100"><img src="https://supplier.cvbumimakmur.my.id/asset/logo/fav-bm1.png" width="100"></td>
                 <td id="header-title">
                     <h1>CV. Bumi Makmur</h1>
                     <p>Jl. Untung Suropati, RT.01/IV Kedungpane, Kec.Mijen, Kota Semarang - 50211</p>

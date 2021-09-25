@@ -23,7 +23,7 @@ switch($op){
 		}
 	break;
 	case 'kriteria':
-		$query = "SELECT id_kriteria, namaKriteria, sifat FROM kriteria WHERE id_kriteria = '$id'";
+		$query = "SELECT id_kriteria, namaKriteria, sifat, id_jenisbarang FROM kriteria WHERE id_kriteria = '$id'";
 		$execute = $konek->query($query);
 		if($execute->num_rows > 0){
 		    $data = $execute->fetch_array(MYSQLI_ASSOC);
@@ -39,7 +39,7 @@ switch($op){
 		}
 	break;
 	case 'bobot':
-		$query = "SELECT id_jenisbarang, bobot, id_bobotkriteria, kriteria.namaKriteria AS namaKriteria FROM bobot_kriteria INNER JOIN kriteria USING (id_kriteria) WHERE id_jenisbarang = '$id'";
+		$query = "SELECT kriteria.id_jenisbarang, kriteria.id_kriteria, bobot, id_bobotkriteria, kriteria.namaKriteria AS namaKriteria FROM bobot_kriteria INNER JOIN kriteria USING (id_kriteria) WHERE kriteria.id_jenisbarang = '$id'";
 		$execute = $konek->query($query);
 		$detail = [];
 		if($execute->num_rows > 0){
@@ -55,7 +55,7 @@ switch($op){
 		}
 	break;
 	case 'nilai':
-		$query = "SELECT id_nilaisupplier, id_nilaikriteria, kriteria.namaKriteria AS namaKriteria, nilai_kriteria.keterangan AS keterangan FROM nilai_supplier INNER JOIN kriteria USING (id_kriteria) INNER JOIN nilai_kriteria USING (id_nilaikriteria) WHERE nilai_supplier.id_supplier='$a' AND nilai_supplier.id_jenisbarang='$b'";
+		$query = "SELECT id_nilaisupplier, id_nilaikriteria, kriteria.id_kriteria AS id_kriteria, kriteria.namaKriteria AS namaKriteria, nilai_kriteria.keterangan AS keterangan FROM nilai_supplier INNER JOIN kriteria USING (id_kriteria) INNER JOIN nilai_kriteria USING (id_nilaikriteria) WHERE nilai_supplier.id_supplier='$a' AND nilai_supplier.id_jenisbarang='$b'";
 		$execute = $konek->query($query);
 		$detail = [];
 		if($execute->num_rows > 0){

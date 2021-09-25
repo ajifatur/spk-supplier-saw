@@ -15,7 +15,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="tile">
-            <?php if($_SESSION['role'] == 1): ?>
+            <?php if($_SESSION['role'] == 1 || $_SESSION['role'] == 3): ?>
             <div class="tile-title-w-btn">
                 <a href="#" class="btn btn-sm btn-primary btn-add"><i class="fa fa-plus mr-2"></i>Tambah Data</a>
             </div>
@@ -27,7 +27,7 @@
                             <tr>
                                 <th width="30">No.</th>
                                 <th>Nama Barang</th>
-                                <?php if($_SESSION['role'] == 1): ?>
+                                <?php if($_SESSION['role'] == 1 || $_SESSION['role'] == 3): ?>
                                 <th width="50">Opsi</th>
                                 <?php endif; ?>
                             </tr>
@@ -44,7 +44,7 @@
                                         <td>'.$no.'</td>
                                         <td>'.$data['namaBarang'].'</td>
                                     ';
-                                    if($_SESSION['role'] == 1){
+                                    if($_SESSION['role'] == 1 || $_SESSION['role'] == 3){
                                         echo '
                                             <td>
                                                 <div class="btn-group">
@@ -67,7 +67,7 @@
     </div>
 </div>
 
-<?php if($_SESSION['role'] == 1): ?>
+<?php if($_SESSION['role'] == 1 || $_SESSION['role'] == 3): ?>
 <!-- Modal Add -->
 <div class="modal" id="modal-add">
     <div class="modal-dialog modal-lg" role="document">

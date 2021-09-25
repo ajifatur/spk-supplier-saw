@@ -25,7 +25,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="tile">
-            <?php if($_SESSION['role'] == 1): ?>
+            <?php if($_SESSION['role'] == 1 || $_SESSION['role'] == 3): ?>
             <div class="tile-title-w-btn">
                 <a href="#" class="btn btn-sm btn-primary btn-add"><i class="fa fa-plus mr-2"></i>Tambah Data</a>
             </div>
@@ -37,7 +37,7 @@
                             <tr>
                                 <th width="30">No.</th>
                                 <th>Nama Barang</th>
-                                <th width="<?= $_SESSION['role'] == 1 ? '70' : '30' ?>">Opsi</th>
+                                <th width="<?= $_SESSION['role'] == 1 || $_SESSION['role'] == 3 ? '70' : '30' ?>">Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,7 +55,7 @@
                                             <div class="btn-group">
                                                 <a href="#" class="btn btn-sm btn-info btn-detail" data-id="'.$data['idbarangbobot'].'" data-op="bobot" data-toggle="tooltip" title="Detail"><i class="fa fa-eye"></i></a>
                                     ';
-                                    if($_SESSION['role'] == 1){
+                                    if($_SESSION['role'] == 1 || $_SESSION['role'] == 3){
                                         echo '
                                                 <a href="#" class="btn btn-sm btn-warning btn-edit" data-id="'.$data['idbarangbobot'].'" data-op="bobot" data-toggle="tooltip" title="Edit"><i class="fa fa-edit"></i></a>
                                                 <a href="#" class="btn btn-sm btn-danger btn-delete" data-id="'.$data['idbarangbobot'].'" data-op="bobot" data-toggle="tooltip" title="Hapus"><i class="fa fa-trash"></i></a>';
@@ -109,11 +109,11 @@
                         $i = 0;
                         while($data=$execute->fetch_array(MYSQLI_ASSOC)){
                             echo '
-                            <div class="form-group row">
+                            <div class="form-group form-group-penilaian row" data-id="'.$data['id_kriteria'].'">
                                 <label class="col-form-label col-md-3">'.$data['namaKriteria'].' <span class="text-danger">*</span></label>
                                 <div class="col-md-9">
-                                    <input type="hidden" name="id[]" id="id_bobotkriteria-'.$i.'">
-                                    <select name="bobot[]" class="form-control" id="bobot-'.$i.'" disabled>
+                                    <input type="hidden" name="id[]" id="id_bobotkriteria-'.$data['id_kriteria'].'">
+                                    <select name="bobot[]" class="form-control" id="bobot-'.$data['id_kriteria'].'" disabled>
                                         <option value="" disabled selected>-- Pilih--</option>';
                             foreach($listWeight as $w){
                                 echo '<option value="'.$w['nilai'].'">'.$w['nama'].'</option>';
@@ -134,7 +134,7 @@
     </div>
 </div>
 
-<?php if($_SESSION['role'] == 1): ?>
+<?php if($_SESSION['role'] == 1 || $_SESSION['role'] == 3): ?>
 <!-- Modal Add -->
 <div class="modal" id="modal-add">
     <div class="modal-dialog modal-lg" role="document">
@@ -149,7 +149,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-md-3">Barang <span class="text-danger">*</span></label>
                         <div class="col-md-9">
-                            <select name="barang" class="form-control" required>
+                            <select name="barang" class="form-control penilaian-barang" data-op="bobot" required>
                                 <option value="" disabled selected>-- Pilih--</option>
                                 <?php
                                     $query = "SELECT * FROM jenis_barang";
@@ -163,28 +163,7 @@
                             </select>
                         </div>
                     </div>
-                    <?php
-                        $query = "SELECT id_kriteria, namaKriteria FROM kriteria";
-                        $execute = $konek->query($query);
-                        if($execute->num_rows > 0){
-                            while($data=$execute->fetch_array(MYSQLI_ASSOC)){
-                                echo '
-                                <div class="form-group row">
-                                    <label class="col-form-label col-md-3">'.$data['namaKriteria'].' <span class="text-danger">*</span></label>
-                                    <div class="col-md-9">
-                                        <input type="hidden" name="kriteria[]" value="'.$data['id_kriteria'].'">
-                                        <select name="bobot[]" class="form-control" required>
-                                            <option value="" disabled selected>-- Pilih--</option>';
-                                foreach($listWeight as $w){
-                                    echo '<option value="'.$w['nilai'].'">'.$w['nama'].'</option>';
-                                }
-                                echo '
-                                        </select>
-                                    </div>
-                                </div>';
-                            }
-                        }
-                    ?>
+                    <div class="kriteria-barang"></div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-save mr-2"></i>Simpan</button>
@@ -230,11 +209,11 @@
                             $i = 0;
                             while($data=$execute->fetch_array(MYSQLI_ASSOC)){
                                 echo '
-                                <div class="form-group row">
+                                <div class="form-group form-group-penilaian row" data-id="'.$data['id_kriteria'].'">
                                     <label class="col-form-label col-md-3">'.$data['namaKriteria'].' <span class="text-danger">*</span></label>
                                     <div class="col-md-9">
-                                        <input type="hidden" name="id[]" id="id_bobotkriteria-'.$i.'">
-                                        <select name="bobot[]" class="form-control" id="bobot-'.$i.'" required>
+                                        <input type="hidden" name="id[]" id="id_bobotkriteria-'.$data['id_kriteria'].'">
+                                        <select name="bobot[]" class="form-control" id="bobot-'.$data['id_kriteria'].'" required>
                                             <option value="" disabled selected>-- Pilih--</option>';
                                 foreach($listWeight as $w){
                                     echo '<option value="'.$w['nilai'].'">'.$w['nama'].'</option>';

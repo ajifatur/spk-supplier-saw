@@ -37,7 +37,7 @@ switch ($op){
     case 'kriteria'://tambah data kriteria
         $cek="SELECT namaKriteria FROM kriteria WHERE namaKriteria='$kriteria'";
         $query=null;
-        $query="INSERT INTO kriteria (namaKriteria,sifat) VALUES ('$kriteria','$sifat')";
+        $query="INSERT INTO kriteria (namaKriteria,sifat,id_jenisbarang) VALUES ('$kriteria','$sifat','$barang')";
         $crud->multiAddData($cek,$query,$konek);
     break;
     case 'subkriteria'://tambah data sub kriteria

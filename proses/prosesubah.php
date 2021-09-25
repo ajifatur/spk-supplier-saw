@@ -39,7 +39,7 @@ switch ($op){
         break;
     case 'kriteria':
         $cek="SELECT namaKriteria FROM kriteria WHERE namaKriteria='$kriteria' AND id_kriteria!='$id'";
-        $query="UPDATE kriteria SET namaKriteria='$kriteria',sifat='$sifat' WHERE id_kriteria='$id';";
+        $query="UPDATE kriteria SET namaKriteria='$kriteria',sifat='$sifat',id_jenisbarang='$barang' WHERE id_kriteria='$id';";
         $crud->multiUpdate($cek,$query,$konek,'./?page=kriteria');
         break;
     case 'subkriteria':
@@ -49,15 +49,15 @@ switch ($op){
         break;
     case 'bobot':
         $query=null;
-        for ($i=0;$i<count($id);$i++){
-            $query.="UPDATE bobot_kriteria SET bobot='$bobot[$i]' WHERE id_bobotkriteria='$id[$i]';";
+        foreach ($bobot as $key=>$value){
+            $query.="UPDATE bobot_kriteria SET bobot='$value' WHERE id_bobotkriteria='$key';";
         }
         $crud->update($query,$konek,'./?page=bobot');
     break;
     case 'nilai':
         $query=null;
-        for ($i=0;$i<count($id);$i++){
-            $query.="UPDATE nilai_supplier SET id_nilaikriteria='$nilai[$i]' WHERE id_nilaisupplier='$id[$i]';";
+        foreach ($nilai as $key=>$value){
+            $query.="UPDATE nilai_supplier SET id_nilaikriteria='$value' WHERE id_nilaisupplier='$key';";
         }
         $crud->update($query,$konek,'./?page=penilaian');
     break;
@@ -72,11 +72,11 @@ switch ($op){
         }
         $session = array('id'=>$id,'nama'=>$nama,'username'=>$username);
         if(isset($redirect))
-			$user->update($cek,$query,$konek,'./?page='.$redirect,$session);
-		else
-			$user->update($cek,$query,$konek,'./?page=pengguna',$session);
+            $user->update($cek,$query,$konek,'./?page='.$redirect,$session);
+        else
+            $user->update($cek,$query,$konek,'./?page=pengguna',$session);
     break;
     case 'update-password':
-		$user->updatePassword($id,$current_password,$new_password,$confirm_password,$konek);
+        $user->updatePassword($id,$current_password,$new_password,$confirm_password,$konek);
     break;
 }
