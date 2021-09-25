@@ -15,7 +15,7 @@ ob_start();
         #header-title {text-align: center;}
         #header-title h1 {margin-top: 0px; margin-bottom: 10px;}
         #header-title p {margin-top: 0px; margin-bottom: 5px; font-size: 18px;}
-        #matriks-1, #matriks-2 {display: none;}
+        #matriks-0, #matriks-1, #matriks-2 {display: none;}
         #matriks-3 h4 {display: none;}
         #result-title {text-align: center; font-size: 20px; font-weight: bold;}
         #result {margin-top: 30px;}
